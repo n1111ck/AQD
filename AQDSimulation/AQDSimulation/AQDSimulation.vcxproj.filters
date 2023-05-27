@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="source\CDynamics.cpp" />
+    <ClCompile Include="source\CRungeKutta.cpp" />
+    <ClCompile Include="source\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\CDynamics.h" />
+    <ClInclude Include="source\CRungeKutta.h" />
+    <ClInclude Include="source\CStates.h" />
+  </ItemGroup>
+</Project>
