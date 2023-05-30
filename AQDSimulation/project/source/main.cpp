@@ -2,21 +2,24 @@
 //
 
 
-#include "CRungeKutta.h"
+#include "CSimulation.h"
 #include "CDynamics.h"
+#include "CMotor.h"
 
 #include <cstdlib>
 #include <iostream>
 
 int main()
 {
-	struct AQD::Simulation::SFullStateData* fs = nullptr;
+	struct AQD::Prop::SFullStateData* fs = nullptr;
+	struct AQD::Prop::SMotor* motorConst = nullptr;
+	struct AQD::Prop::SPropertyByPropeller voltage;
 
-
+	// Simulation Pamaters
 	fs->SimParameters.Mass = 2;
-	fs->SimParameters.Inertia[0] = 0.09;
-	fs->SimParameters.Inertia[1] = 0.11;
-	fs->SimParameters.Inertia[2] = 0.20;
+	fs->SimParameters.Inertia[0] = 1.49e-2;
+	fs->SimParameters.Inertia[1] = 1.53e-2;
+	fs->SimParameters.Inertia[2] = 5.32e-2;
 	fs->SimParameters.Length = 30e-2;
 	fs->SimParameters.WindDirection = 0;
 	fs->SimParameters.PolarInertia = 1e-8;
@@ -24,20 +27,17 @@ int main()
 	fs->SimParameters.Step = 1e-4;
 	fs->SimParameters.Time = 0;
 
-	fs->Inputs.Speed.Front = 2.45;
-	fs->Inputs.Speed.Left = 2.5;
-	fs->Inputs.Speed.Right = 2.5;
-	fs->Inputs.Speed.Back = 2.65;
+	// Motor experimental values
+	motorConst->Kv = 110;
+	motorConst->Kf = 1.47;
+	motorConst->Kt = 0.007;
 
-	fs->Inputs.Force.Front = 1.47 * pow(fs->Inputs.Force.Front,2);
-	fs->Inputs.Force.Left = 1.47 * pow(fs->Inputs.Force.Left, 2);
-	fs->Inputs.Force.Right = 1.47 * pow(fs->Inputs.Force.Right, 2);
-	fs->Inputs.Force.Back = 1.47 * pow(fs->Inputs.Force.Back, 2);
+	voltage.Front = 4;
+	voltage.Left = 5;
+	voltage.Right = 5;
+	voltage.Back = 6;
 
-	fs->Inputs.Force.Front = 0.7 * pow(fs->Inputs.Force.Front, 2);
-	fs->Inputs.Force.Left = 0.7 * pow(fs->Inputs.Force.Left, 2);
-	fs->Inputs.Force.Right = 0.7 * pow(fs->Inputs.Force.Right, 2);
-	fs->Inputs.Force.Back = 0.7 * pow(fs->Inputs.Force.Back, 2);
+	fs->Inputs = AQD::Motor::convert(*motorConst, voltage);
 
 	fs->Attitude.Longitude = { 0 };
 	fs->Attitude.Latitude = { 0 };
@@ -45,6 +45,7 @@ int main()
 	fs->Attitude.Pitch = { 0 };
 	fs->Attitude.Roll = { 0 };
 	fs->Attitude.Yaw = { 0 };
+	
 
 	for (int i = 0; i < 10; i++)
 	{

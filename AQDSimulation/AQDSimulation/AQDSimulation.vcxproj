@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\project\source\CDynamics.cpp" />
-    <ClCompile Include="..\project\source\CRungeKutta.cpp" />
+    <ClCompile Include="..\project\source\CMotor.cpp" />
+    <ClCompile Include="..\project\source\CSimulation.cpp" />
     <ClCompile Include="..\project\source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\project\source\CDynamics.h" />
-    <ClInclude Include="..\project\source\CRungeKutta.h" />
-    <ClInclude Include="..\project\source\CStates.h" />
+    <ClInclude Include="..\project\source\CMotor.h" />
+    <ClInclude Include="..\project\source\CSimulation.h" />
+    <ClInclude Include="..\project\source\CProperties.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

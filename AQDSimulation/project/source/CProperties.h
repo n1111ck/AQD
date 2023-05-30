@@ -1,10 +1,16 @@
-#ifndef CSTATES_H
-#define CSTATES_H
+#ifndef CPROPERTIES_H
+#define CPROPERTIES_H
 
 namespace AQD
 {
-	namespace Simulation
+	namespace Prop
 	{
+		struct SMotor
+		{
+			double Kv;	// Constant that relates voltage with motor speed (linear)
+			double Kf;	// Constant that relates motor speed with thrust (quadratic)
+			double Kt;	// Constant that relates motor speed with torque (quadratic)
+		};
 		struct SState
 		{
 			double Accel;
@@ -20,16 +26,11 @@ namespace AQD
 			struct SState Roll;
 			struct SState Yaw;
 		};
-		struct SSimulationParameters
+		struct SPropertyByAxis
 		{
-			double Mass;
-			double Inertia[3];
-			double PolarInertia;
-			double Length;
-			double WindForce;
-			double WindDirection;
-			double Step;
-			double Time;
+			double x;
+			double y;
+			double z;
 		};
 		struct SPropertyByPropeller
 		{
@@ -43,12 +44,6 @@ namespace AQD
 			struct SPropertyByPropeller Force;
 			struct SPropertyByPropeller Torque;
 			struct SPropertyByPropeller Speed;
-		};
-		struct SFullStateData
-		{
-			struct SAttitude Attitude;
-			struct SSimulationParameters SimParameters;
-			struct SInputs Inputs;
 		};
 	}
 }
