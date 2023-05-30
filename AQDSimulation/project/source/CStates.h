@@ -5,18 +5,13 @@ namespace AQD
 {
 	namespace Simulation
 	{
-		enum EValidityState
-		{
-			EValidityState_Invalid = 1,
-			EValidityState_Valid = 3
-		};
 		struct SState
 		{
 			double Accel;
 			double Speed;
 			double Position;
 		};
-		struct SMovement
+		struct SAttitude
 		{
 			struct SState Longitude;
 			struct SState Latitude;
@@ -29,6 +24,7 @@ namespace AQD
 		{
 			double Mass;
 			double Inertia[3];
+			double PolarInertia;
 			double Length;
 			double WindForce;
 			double WindDirection;
@@ -46,10 +42,11 @@ namespace AQD
 		{
 			struct SPropertyByPropeller Force;
 			struct SPropertyByPropeller Torque;
+			struct SPropertyByPropeller Speed;
 		};
 		struct SFullStateData
 		{
-			struct SMovement Movement;
+			struct SAttitude Attitude;
 			struct SSimulationParameters SimParameters;
 			struct SInputs Inputs;
 		};
