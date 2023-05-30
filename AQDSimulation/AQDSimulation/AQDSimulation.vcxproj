@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\CDynamics.cpp" />
-    <ClCompile Include="source\CRungeKutta.cpp" />
-    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="..\project\source\CDynamics.cpp" />
+    <ClCompile Include="..\project\source\CRungeKutta.cpp" />
+    <ClCompile Include="..\project\source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\CDynamics.h" />
-    <ClInclude Include="source\CRungeKutta.h" />
-    <ClInclude Include="source\CStates.h" />
+    <ClInclude Include="..\project\source\CDynamics.h" />
+    <ClInclude Include="..\project\source\CRungeKutta.h" />
+    <ClInclude Include="..\project\source\CStates.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -80,6 +80,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)project\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>..\project\bin\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
