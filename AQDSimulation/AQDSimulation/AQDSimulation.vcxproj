@@ -20,12 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\project\source\CMotor.cpp" />
-    <ClCompile Include="..\project\source\CSimulation.cpp" />
+    <ClCompile Include="..\project\source\CPlant.cpp" />
     <ClCompile Include="..\project\source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\project\source\CMotor.h" />
-    <ClInclude Include="..\project\source\CSimulation.h" />
+    <ClInclude Include="..\project\source\CPlant.h" />
     <ClInclude Include="..\project\source\CProperties.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

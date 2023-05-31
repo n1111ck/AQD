@@ -5,11 +5,14 @@ namespace AQD
 {
 	namespace Prop
 	{
-		struct SMotor
+		enum EState
 		{
-			double Kv;	// Constant that relates voltage with motor speed (linear)
-			double Kf;	// Constant that relates motor speed with thrust (quadratic)
-			double Kt;	// Constant that relates motor speed with torque (quadratic)
+			Longitude = 0,
+			Latitude = 1,
+			Altitude = 2,
+			Pitch = 3,
+			Roll = 4,
+			Yaw = 5
 		};
 		struct SState
 		{
@@ -28,9 +31,9 @@ namespace AQD
 		};
 		struct SPropertyByAxis
 		{
-			double x;
-			double y;
-			double z;
+			double X;
+			double Y;
+			double Z;
 		};
 		struct SPropertyByPropeller
 		{

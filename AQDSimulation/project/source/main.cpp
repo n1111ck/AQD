@@ -2,8 +2,7 @@
 //
 
 
-#include "CSimulation.h"
-#include "CDynamics.h"
+#include "CPlant.h"
 #include "CMotor.h"
 
 #include <cstdlib>
@@ -11,46 +10,37 @@
 
 int main()
 {
-	struct AQD::Prop::SFullStateData* fs = nullptr;
-	struct AQD::Prop::SMotor* motorConst = nullptr;
-	struct AQD::Prop::SPropertyByPropeller voltage;
-
-	// Simulation Pamaters
-	fs->SimParameters.Mass = 2;
-	fs->SimParameters.Inertia[0] = 1.49e-2;
-	fs->SimParameters.Inertia[1] = 1.53e-2;
-	fs->SimParameters.Inertia[2] = 5.32e-2;
-	fs->SimParameters.Length = 30e-2;
-	fs->SimParameters.WindDirection = 0;
-	fs->SimParameters.PolarInertia = 1e-8;
-	fs->SimParameters.WindForce = 0;
-	fs->SimParameters.Step = 1e-4;
-	fs->SimParameters.Time = 0;
-
-	// Motor experimental values
-	motorConst->Kv = 110;
-	motorConst->Kf = 1.47;
-	motorConst->Kt = 0.007;
-
-	voltage.Front = 4;
-	voltage.Left = 5;
-	voltage.Right = 5;
-	voltage.Back = 6;
-
-	fs->Inputs = AQD::Motor::convert(*motorConst, voltage);
-
-	fs->Attitude.Longitude = { 0 };
-	fs->Attitude.Latitude = { 0 };
-	fs->Attitude.Altitude = { 0 };
-	fs->Attitude.Pitch = { 0 };
-	fs->Attitude.Roll = { 0 };
-	fs->Attitude.Yaw = { 0 };
+	struct AQD::Prop::SPropertyByPropeller v1, v2, v3;
 	
+	AQD::CMotor* motor = new AQD::CMotor(110.0, 5.07e-6, 7e-9);
+	AQD::CPlant* plant = new AQD::CPlant(true);
 
-	for (int i = 0; i < 10; i++)
+	v1.Front = 8.94;
+	v1.Left = 8.94;
+	v1.Right = 8.94;
+	v1.Back = 8.94;
+
+	v2.Front = 9;
+	v2.Left = 10;
+	v2.Right = 10;
+	v2.Back = 11;
+
+	v3.Front = 11;
+	v3.Left = 10;
+	v3.Right = 10;
+	v3.Back = 9;
+	
+	for (int i = 0; i < 100; i++)
 	{
-		AQD::Simulation::simulate(fs);
-		std::cout << fs->Attitude.Pitch.Position << " " << fs->Attitude.Pitch.Speed << " " << fs->Attitude.Pitch.Accel << std::endl;
+		std::cout << plant->getAttitude().Pitch.Position << std::endl;
+		if(i < 10)
+			plant->update(motor->convert(v1));
+		else if(i < 11)
+			plant->update(motor->convert(v2));
+		else if(i < 12)
+			plant->update(motor->convert(v3));
+		else
+			plant->update(motor->convert(v1));
 	}
 
 	return 0;
